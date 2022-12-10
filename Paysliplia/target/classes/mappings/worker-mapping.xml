@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="workerDAO">
+	<select id="getLoginWorker" resultType="worker">
+		select * from WORKER where worker_id=#{worker_id} and pwd=#{pwd}
+	</select>
+	
+	<select id="getId" resultType="worker">
+		select * from WORKER where name=#{name} and phone=#{phone}
+	</select>
+	
+	<select id="getPwd" resultType="worker">
+		select * from WORKER where name=#{name} and worker_id=#{worker_id}
+	</select>
+	
+	<select id="getWorkerList" resultType="worker">
+		select * from WORKER
+	</select>
+	
+	<insert id="insertWorker">
+		insert into WORKER (
+			worker_no, 
+			worker_id, 
+			pwd, 
+			name, 
+			phone, 
+			gender, 
+			age, 
+			grade, 
+			join_date
+		) values (
+			(select nvl(max(worker_no),0)+1 from WORKER), 
+			#{worker_id}, 
+			#{pwd},
+			#{name},
+			#{phone}, 
+			#{gender}, 
+			#{age}, 
+			1, 
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD- HH24:MI:SS')
+		)
+	</insert>
+</mapper>

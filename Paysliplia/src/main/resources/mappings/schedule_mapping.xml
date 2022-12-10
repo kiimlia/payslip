@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="myBatisScheduleDAO">
+	<select id="getScheduleList" resultType="schedule">
+		select 
+               B.seq, 		
+			   A.worker_no, 
+		         name, 
+		       B.work_start_date, 
+		       B.work_end_date 
+		from WORKER A, SCHEDULE B 
+		WHERE A.worker_no = B.worker_no
+	</select>
+	
+	<insert id="insertSchedule">
+		insert into SCHEDULE(
+		seq,
+		worker_no,
+		work_start_date,
+		work_end_date)
+		values (
+		(select nvl(max(seq),0)+1 from SCHEDULE),
+		#{worker_no}, 
+		#{work_start_date}, 
+		#{work_end_date}
+		)
+	</insert>
+	
+	<update id="updateSchedule">
+		UPDATE SCHEDULE
+		SET work_start_date=#{work_start_date},
+		    work_end_date=#{work_end_date}
+		WHERE seq=#{seq}
+	</update>
+</mapper>

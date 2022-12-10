@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+	<settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+	<!-- Alias 설정 Alias: 별명,별칭...   -->
+	<typeAliases>
+		<typeAlias alias="worker" type="com.company.biz.worker.WorkerVO"/>
+		
+		<typeAlias alias="schedule" type="com.company.biz.schedule.ScheduleVO"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappings/worker-mapping.xml"/>
+	
+		<mapper resource="mappings/schedule_mapping.xml"/>
+	</mappers>
+	
+
+</configuration>
